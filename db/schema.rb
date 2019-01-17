@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 2019_01_17_161822) do
     t.string "away_team"
     t.string "home_team"
     t.string "city"
-    t.string "arena"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
