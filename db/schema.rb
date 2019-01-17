@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 2019_01_17_161822) do
     t.string "home_team"
     t.string "city"
     t.string "arena"
-    t.string "hotel"
-    t.string "transportation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,6 +39,8 @@ ActiveRecord::Schema.define(version: 2019_01_17_161822) do
     t.bigint "game_id"
     t.bigint "user_id"
     t.string "title"
+    t.string "hotel"
+    t.string "transportation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_trips_on_game_id"

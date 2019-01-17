@@ -6,8 +6,6 @@ class CreateGames < ActiveRecord::Migration[5.2]
       t.string :home_team
       t.string :city
       t.string :arena
-      t.string :hotel
-      t.string :transportation
 
       t.timestamps
     end
