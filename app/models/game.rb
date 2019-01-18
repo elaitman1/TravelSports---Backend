@@ -14,7 +14,8 @@ class Game < ApplicationRecord
 
     cleanedGame = {
       id: self.id,
-      date: self.date.in_time_zone('Eastern Time (US & Canada)')
+      title: self.title,
+      date: self.date
     }
 
     return {

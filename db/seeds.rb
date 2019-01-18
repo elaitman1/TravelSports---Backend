@@ -32,11 +32,12 @@ def get_games
 
     cleanTime = DateTime.new(dateArray[0],dateArray[1],dateArray[2],timeArray[0],timeArray[1]).in_time_zone('Eastern Time (US & Canada)')
 
-    Game.create(date: cleanTime, away_team_id: game['idAwayTeam'], home_team_id: game['idHomeTeam'])
+    Game.create(title: game['strEvent'], date: cleanTime, away_team_id: game['idAwayTeam'], home_team_id: game['idHomeTeam'])
   end
 end
 
 get_games
+puts "games seeded"
 
 
 def get_teams
@@ -55,3 +56,4 @@ def get_teams
 end
 
 get_teams
+puts "teams seeded"
