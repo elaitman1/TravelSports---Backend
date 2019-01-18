@@ -10,6 +10,8 @@ User.destroy_all
 Game.destroy_all
 Trip.destroy_all
 Experience.destroy_all
+Team.destroy_all
+
 
 u1 = User.create(username: "Matt", home_city: "Long Island")
 # g1 = Game.create(date: DateTime.new(), away_team: "76ers", home_team: "Knicks", city: "New York", arena: "MSG")
@@ -19,33 +21,82 @@ u1 = User.create(username: "Matt", home_city: "Long Island")
 
 def get_games
   request = RestClient.get("https://www.thesportsdb.com/api/v1/json/1/eventsseason.php?id=4387&s=1819")
-  JSON.parse(request)
+  response = JSON.parse(request)
+
+  response.first.last.each do |game|
+    dateEvent = game['dateEvent']
+    dateArray = dateEvent.split("-").map{|d| d.to_i}
+
+    strTime = game['strTime']
+    timeArray = strTime.split(":").map{|t| t.to_i}
+
+    cleanTime = DateTime.new(dateArray[0],dateArray[1],dateArray[2],timeArray[0],timeArray[1]).in_time_zone('Eastern Time (US & Canada)')
+
+
+    Game.create(date: cleanTime, away_team_id: game['idAwayTeam'], home_team_id: game['idHomeTeam'])
+  end
 end
+
+get_games
+
+
+def get_teams
+  request = RestClient.get("https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387")
+  response = JSON.parse(request)
+
+  response.first.last.each do |team|
+    Team.create(name: team['strTeam'],
+                id_team: team['idTeam'],
+                stadium_img: team['strStadiumTeam'],
+                stadium_name: team['strStadium'],
+                stadium_location: team['strStadiumLocation'],
+                website: team['strWebsite'],
+                logo: team['strTeamBadge'])
+  end
+end
+
+get_teams
+
+
 
 # get_games.first.last.each{|game| puts game["idEvent"]}
 # gets first game keys
 #puts get_games.first.last.first.keys
 
-get_games.first.last.each do |game|
-  dateEvent = game['dateEvent']
-  dateArray = dateEvent.split("-").map{|d| d.to_i}
 
-  strTime = game['strTime']
-  timeArray = strTime.split(":").map{|t| t.to_i}
+# First Working Version, did not have team id for api to ad more team and venue info
+#
+# get_games.first.last.each do |game|
+#   dateEvent = game['dateEvent']
+#   dateArray = dateEvent.split("-").map{|d| d.to_i}
+#
+#   strTime = game['strTime']
+#   timeArray = strTime.split(":").map{|t| t.to_i}
+#
+#   cleanTime = DateTime.new(dateArray[0],dateArray[1],dateArray[2],timeArray[0],timeArray[1]).in_time_zone('Eastern Time (US & Canada)')
+#
+#   homeCity = nil
+#   arrayHomeCity = game['strHomeTeam'].split()
+#   if arrayHomeCity.length === 3 && arrayHomeCity[0] === "Portland"
+#     homeCity = arrayHomeCity[0]
+#   elsif arrayHomeCity.length === 3
+#     homeCity = arrayHomeCity[0] + " " + arrayHomeCity[1]
+#   else
+#     homeCity = arrayHomeCity[0]
+#   end
+#
+#   Game.create(date: cleanTime, away_team: game['strAwayTeam'], home_team: game['strHomeTeam'], city: homeCity)
+# end
 
-  cleanTime = DateTime.new(dateArray[0],dateArray[1],dateArray[2],timeArray[0],timeArray[1]).in_time_zone('Eastern Time (US & Canada)')
-
-  homeCity = nil
-  arrayHomeCity = game['strHomeTeam'].split()
-  if arrayHomeCity.length === 3 && arrayHomeCity[0] === "Portland"
-    homeCity = arrayHomeCity[0]
-  elsif arrayHomeCity.length === 3
-    homeCity = arrayHomeCity[0] + " " + arrayHomeCity[1]
-  else
-    homeCity = arrayHomeCity[0]
-  end
-
-  Game.create(date: cleanTime, away_team: game['strAwayTeam'], home_team: game['strHomeTeam'], city: homeCity)
-end
-
-get_games
+# get_games.first.last.each do |game|
+#   dateEvent = game['dateEvent']
+#   dateArray = dateEvent.split("-").map{|d| d.to_i}
+#
+#   strTime = game['strTime']
+#   timeArray = strTime.split(":").map{|t| t.to_i}
+#
+#   cleanTime = DateTime.new(dateArray[0],dateArray[1],dateArray[2],timeArray[0],timeArray[1]).in_time_zone('Eastern Time (US & Canada)')
+#
+#
+#   Game.create(date: cleanTime, away_team_id: game['idAwayTeam'], home_team_id: game['idHomeTeam'])
+# end
