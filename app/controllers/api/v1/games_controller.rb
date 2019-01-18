@@ -6,7 +6,14 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def show
-    render json: @game
+    # render json: @game
+    # @game_details  = {
+    #   game: @game,
+    #   home_team: Team.all.select {|t| t['id_team'] === @game['home_team_id']},
+    #   away_team: Team.all.select {|t| t['id_team'] === @game['away_team_id']}
+    # }
+
+    render json: @game.game_details
   end
 
   private

@@ -47,7 +47,7 @@ def get_teams
   response.first.last.each do |team|
     Team.create(name: team['strTeam'],
                 id_team: team['idTeam'],
-                stadium_img: team['strStadiumTeam'],
+                stadium_img: team['strStadiumThumb'],
                 stadium_name: team['strStadium'],
                 stadium_location: team['strStadiumLocation'],
                 website: team['strWebsite'],
@@ -56,47 +56,3 @@ def get_teams
 end
 
 get_teams
-
-
-
-# get_games.first.last.each{|game| puts game["idEvent"]}
-# gets first game keys
-#puts get_games.first.last.first.keys
-
-
-# First Working Version, did not have team id for api to ad more team and venue info
-#
-# get_games.first.last.each do |game|
-#   dateEvent = game['dateEvent']
-#   dateArray = dateEvent.split("-").map{|d| d.to_i}
-#
-#   strTime = game['strTime']
-#   timeArray = strTime.split(":").map{|t| t.to_i}
-#
-#   cleanTime = DateTime.new(dateArray[0],dateArray[1],dateArray[2],timeArray[0],timeArray[1]).in_time_zone('Eastern Time (US & Canada)')
-#
-#   homeCity = nil
-#   arrayHomeCity = game['strHomeTeam'].split()
-#   if arrayHomeCity.length === 3 && arrayHomeCity[0] === "Portland"
-#     homeCity = arrayHomeCity[0]
-#   elsif arrayHomeCity.length === 3
-#     homeCity = arrayHomeCity[0] + " " + arrayHomeCity[1]
-#   else
-#     homeCity = arrayHomeCity[0]
-#   end
-#
-#   Game.create(date: cleanTime, away_team: game['strAwayTeam'], home_team: game['strHomeTeam'], city: homeCity)
-# end
-
-# get_games.first.last.each do |game|
-#   dateEvent = game['dateEvent']
-#   dateArray = dateEvent.split("-").map{|d| d.to_i}
-#
-#   strTime = game['strTime']
-#   timeArray = strTime.split(":").map{|t| t.to_i}
-#
-#   cleanTime = DateTime.new(dateArray[0],dateArray[1],dateArray[2],timeArray[0],timeArray[1]).in_time_zone('Eastern Time (US & Canada)')
-#
-#
-#   Game.create(date: cleanTime, away_team_id: game['idAwayTeam'], home_team_id: game['idHomeTeam'])
-# end
