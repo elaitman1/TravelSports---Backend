@@ -1,8 +1,8 @@
 class Api::V1::ExperiencesController < ApplicationController
   before_action :find_experience, only: [:show, :update]
-  
+
   def show
-    render json: @experience
+    render json: @experience.add_game_id
   end
 
   def create
