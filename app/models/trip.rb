@@ -13,4 +13,13 @@ class Trip < ApplicationRecord
       }
     end
   end
+
+  def details
+    {
+      trip: self,
+      hotel: self.hotel.name,
+      game: self.game,
+      transportation: self.transportation.name
+    }
+  end
 end

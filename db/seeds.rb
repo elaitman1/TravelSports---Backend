@@ -11,6 +11,8 @@ Game.destroy_all
 Trip.destroy_all
 Experience.destroy_all
 Team.destroy_all
+Hotel.destroy_all
+Transportation.destroy_all
 
 
 u1 = User.create(username: "Matt", home_city: "Long Island")
@@ -61,7 +63,9 @@ puts "teams seeded"
 h1 = Hotel.create(name: "Ritz")
 h2 = Hotel.create(name: "Marriot")
 h3 = Hotel.create(name: "Motel 6")
+puts "hotels seeded"
 
 t1 = Transportation.create(name: "Jet Blue")
 t2 = Transportation.create(name: "American Airlines")
 t3 = Transportation.create(name: "SouthWest")
+puts "transportations loaded"

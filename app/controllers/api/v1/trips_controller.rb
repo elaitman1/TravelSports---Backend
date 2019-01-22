@@ -6,7 +6,7 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def show
-    render json: @trip
+    render json: @trip.details
   end
 
   def create
