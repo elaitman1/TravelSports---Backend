@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 2019_01_18_143131) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "hotels", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "id_team"
@@ -44,15 +50,23 @@ ActiveRecord::Schema.define(version: 2019_01_18_143131) do
     t.string "logo"
   end
 
+  create_table "transportations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "trips", force: :cascade do |t|
     t.bigint "game_id"
     t.bigint "user_id"
     t.string "title"
-    t.string "hotel"
-    t.string "transportation"
+    t.bigint "hotel_id"
+    t.bigint "transportation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_trips_on_game_id"
+    t.index ["hotel_id"], name: "index_trips_on_hotel_id"
+    t.index ["transportation_id"], name: "index_trips_on_transportation_id"
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
@@ -65,5 +79,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_143131) do
 
   add_foreign_key "experiences", "trips"
   add_foreign_key "trips", "games"
+  add_foreign_key "trips", "hotels"
+  add_foreign_key "trips", "transportations"
   add_foreign_key "trips", "users"
 end

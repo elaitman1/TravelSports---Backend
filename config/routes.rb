@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       end
       resources :games, only: [:index, :show]
       resources :teams, only: [:index, :show]
+      resources :transportations, only: [:index, :show]
+      resources :hotels, only: [:index, :show]
     end
   end
 end

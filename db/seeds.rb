@@ -57,3 +57,11 @@ end
 
 get_teams
 puts "teams seeded"
+
+h1 = Hotel.create(name: "Ritz")
+h2 = Hotel.create(name: "Marriot")
+h3 = Hotel.create(name: "Motel 6")
+
+t1 = Transportation.create(name: "Jet Blue")
+t2 = Transportation.create(name: "American Airlines")
+t3 = Transportation.create(name: "SouthWest")

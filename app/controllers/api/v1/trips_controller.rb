@@ -34,7 +34,7 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def trip_params
-    params.permit(:game_id, :user_id, :title, :hotel, :transportation)
+    params.permit(:game_id, :user_id, :title, :hotel_id, :transportation_id)
   end
 
   def find_trip

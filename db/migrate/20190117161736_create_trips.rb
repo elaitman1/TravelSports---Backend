@@ -4,8 +4,8 @@ class CreateTrips < ActiveRecord::Migration[5.2]
       t.references :game, foreign_key: true
       t.references :user, foreign_key: true
       t.string :title
-      t.string :hotel
-      t.string :transportation
+      t.references :hotel, foreign_key: true
+      t.references :transportation, foreign_key: true
 
       t.timestamps
     end
