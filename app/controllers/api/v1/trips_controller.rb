@@ -1,7 +1,7 @@
 class Api::V1::TripsController < ApplicationController
   before_action :find_trip, only: [:show, :update, :destroy]
   def index
-    @trips = Trip.all
+    @trips = Trip.trips_and_games
     render json: @trips
   end
 
