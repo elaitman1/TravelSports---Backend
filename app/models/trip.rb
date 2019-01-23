@@ -6,7 +6,9 @@ class Trip < ApplicationRecord
   has_one :experience
 
   def self.trips_and_games
+
     self.all.map do |trip|
+      
        {
         trip: trip,
         game: trip.game
