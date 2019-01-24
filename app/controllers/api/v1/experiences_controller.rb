@@ -1,6 +1,11 @@
 class Api::V1::ExperiencesController < ApplicationController
   before_action :find_experience, only: [:show, :update]
 
+  def index
+    @experiences = Experience.add_game_ids
+    render json: @experiences
+  end
+
   def show
     render json: @experience.add_game_id
   end

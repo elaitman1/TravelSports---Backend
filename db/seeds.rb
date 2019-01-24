@@ -18,7 +18,7 @@ Game.destroy_all
 User.destroy_all
 
 
-u1 = User.create(username: "Matt", home_city: "Long Island", password: "thisisi")
+u1 = User.create(username: "Matt", home_city: "Long Island", password: "test")
 
 
 
